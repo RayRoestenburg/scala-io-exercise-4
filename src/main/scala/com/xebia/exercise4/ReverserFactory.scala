@@ -1,4 +1,4 @@
-package com.xebia.exercise3
+package com.xebia.exercise4
 
 import scala.concurrent.{ExecutionContext, Future}
 

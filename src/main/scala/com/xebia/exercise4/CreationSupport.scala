@@ -1,4 +1,4 @@
-package com.xebia.exercise3
+package com.xebia.exercise4
 
 import akka.actor.{ActorContext, ActorRef, Props}
 

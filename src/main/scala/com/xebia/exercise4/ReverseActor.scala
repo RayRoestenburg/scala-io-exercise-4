@@ -1,7 +1,7 @@
-package com.xebia.exercise3
+package com.xebia.exercise4
 
 import akka.actor.{Actor, Props}
-import com.xebia.exercise3.ReverserFactory.AsyncReverseFunction
+import com.xebia.exercise4.ReverserFactory.AsyncReverseFunction
 import scala.concurrent.duration._
 import scala.util.{Success, Failure}
 

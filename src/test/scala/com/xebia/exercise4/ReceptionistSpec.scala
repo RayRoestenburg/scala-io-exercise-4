@@ -1,4 +1,4 @@
-package com.xebia.exercise3
+package com.xebia.exercise4
 
 import spray.testkit.Specs2RouteTest
 import org.specs2.mutable.Specification
