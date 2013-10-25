@@ -12,13 +12,10 @@ object L33tActor {
 class L33tActor extends Actor {
   import L33tActor._
 
-  //TODO create a val for the settings
   val settings = Settings(context.system)
 
-  //TODO get 'uppercase' boolean from the Settings Format object
   val upper = settings.L33t.uppercase
 
-  //TODO get 'useShift' boolean from the Settings Format object
   val useShiftDigit = settings.L33t.useShift
 
   val conversionMap =      Map('o'-> 0, 'i'-> 1, 'z'->2, 'e'-> 3, 'a' -> '4', 's' -> 5, 'b'-> 6, 't' -> 7, 'B'-> 8, 'g'-> 9)

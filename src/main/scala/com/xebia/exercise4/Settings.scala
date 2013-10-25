@@ -5,8 +5,6 @@ import akka.actor._
 import scala.concurrent.duration.FiniteDuration
 import java.util.concurrent.TimeUnit
 
-//TODO create a Settings class that extends from Extension
-//TODO add a constructor with a config and an ExtendedActorSystem
 class Settings(config: Config, extendedSystem: ExtendedActorSystem) extends Extension {
 
   object Http {
@@ -14,9 +12,7 @@ class Settings(config: Config, extendedSystem: ExtendedActorSystem) extends Exte
     val Host = config.getString("scala-io-exercise.http.host")
   }
 
-  //TODO create a L33t object that contains the uppercase, useShift and the conversion maps
   object L33t {
-    // TODO read the uppercase and useshift from your configuration
     val uppercase = config.getBoolean("scala-io-exercise.l33t.uppercase")
     val useShift = config.getBoolean("scala-io-exercise.l33t.use-shift")
   }
@@ -26,10 +22,7 @@ class Settings(config: Config, extendedSystem: ExtendedActorSystem) extends Exte
 }
 
 
-//TODO create a Settings object that extends ExtensionId[Settings] and ExtensionIdProvider
 object Settings extends ExtensionId[Settings] with ExtensionIdProvider {
-  //TODO override lookup and return the canonical extension id (the Settings
   override def lookup = Settings
-  //TODO override createExtension and create a new Settings
   override def createExtension(system: ExtendedActorSystem) = new Settings(system.settings.config, system)
 }
