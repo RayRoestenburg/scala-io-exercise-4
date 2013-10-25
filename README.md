@@ -33,6 +33,7 @@ The L33tActor needs to be modified to use the configuration.
 
 ###The Exercise
 
+- Use the Settings to configure the HTTP host and port in the Main class
 - Add your own l33t configuration to the application.conf file (uppercase and use-shift)
 - Create a val for the settings in L33tActor
 - Get 'uppercase' boolean from the Settings L33t object in the L33tActor

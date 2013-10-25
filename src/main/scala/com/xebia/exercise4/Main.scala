@@ -12,7 +12,7 @@ object Main extends App {
   class TheReceptionist extends Receptionist with ActorContextCreationSupport
 
   val receptionist = system.actorOf(Props[TheReceptionist], "receptionist")
-
+  //TODO use the Settings to configure the host and port
   IO(Http) ! Bind(listener= receptionist, interface = "0.0.0.0", port=8000)
 }
 
