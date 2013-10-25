@@ -14,9 +14,9 @@ class L33tActor extends Actor {
 
   //TODO create a val for the settings
 
-  //TODO get 'uppercase' boolean from the Settings Format object
+  //TODO get 'uppercase' boolean from the Settings L33t object
 
-  //TODO get 'useShift' boolean from the Settings Format object
+  //TODO get 'useShift' boolean from the Settings L33t object
 
   val conversionMap =      Map('o'-> 0, 'i'-> 1, 'z'->2, 'e'-> 3, 'a' -> '4', 's' -> 5, 'b'-> 6, 't' -> 7, 'B'-> 8, 'g'-> 9)
 
