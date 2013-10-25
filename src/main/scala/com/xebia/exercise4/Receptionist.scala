@@ -23,8 +23,8 @@ trait ReverseRoute extends HttpService {
 
   def createChild(props:Props, name:String):ActorRef
 
-  import ReverseActor._
-  private val reverseActor = createChild(props, name)
+  private val reverseActor = createChild(ReverseActor.props, ReverseActor.name)
+  private val formatActor = createChild(FormatActor.props, FormatActor.name)
 
   def reverseRoute:Route = path("reverse") {
     post {
@@ -45,6 +45,21 @@ trait ReverseRoute extends HttpService {
           case Success(NotInitialized) => complete(StatusCodes.ServiceUnavailable)
           case Failure(e) => complete(StatusCodes.InternalServerError)
         }
+      }
+    }
+  } ~ path("format") {
+    post {
+      entity(as[FormatRequest]) { request =>
+        // We will fix this import and the timeout definition in a next exercise
+        import ExecutionContext.Implicits.global
+        import scala.concurrent.duration._
+        implicit val timeout = Timeout(20 seconds)
+        import akka.pattern.ask
+
+        import FormatActor._
+
+        val futureResponse = formatActor.ask(Format(request.value)).mapTo[FormatResult].map(r=> FormatResponse(r.value))
+        complete(futureResponse)
       }
     }
   }

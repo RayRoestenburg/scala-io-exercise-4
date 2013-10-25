@@ -11,7 +11,11 @@ import akka.actor.{Actor, Props, ActorRef, ActorRefFactory}
 class ReceptionistSpec extends Specification with Specs2RouteTest {
 
   trait TestCreationSupport extends CreationSupport {
-    def createChild(props: Props, name: String): ActorRef = system.actorOf(Props[FakeReverseActor], "fakereverse")
+    def createChild(props: Props, name: String): ActorRef = {
+      if(name == ReverseActor.name) {
+        system.actorOf(Props[FakeReverseActor], name)
+      } else system.actorOf(props, name)
+    }
 
     def getChild(name: String): Option[ActorRef] = None
   }
