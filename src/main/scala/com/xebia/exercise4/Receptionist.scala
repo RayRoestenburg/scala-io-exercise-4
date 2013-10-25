@@ -18,9 +18,12 @@ trait Receptionist extends HttpServiceActor
 
   def receive = runRoute(reverseRoute ~ l33tRoute)
 
+  implicit def executionContext = actorRefFactory.dispatcher
 }
 
 trait ReverseRoute extends HttpService {
+
+  implicit def executionContext:ExecutionContext
 
   def createChild(props:Props, name:String):ActorRef
 
@@ -29,8 +32,6 @@ trait ReverseRoute extends HttpService {
   def reverseRoute:Route = path("reverse") {
     post {
       entity(as[ReverseRequest]) { request =>
-        // We will fix this import and the timeout definition in a next exercise
-        import ExecutionContext.Implicits.global
         import scala.concurrent.duration._
         implicit val timeout = Timeout(20 seconds)
         import akka.pattern.ask
@@ -52,6 +53,8 @@ trait ReverseRoute extends HttpService {
 
 trait L33tRoute extends HttpService {
 
+  implicit def executionContext:ExecutionContext
+
   def createChild(props:Props, name:String):ActorRef
 
   private val l33tActor = createChild(L33tActor.props, L33tActor.name)
@@ -59,8 +62,6 @@ trait L33tRoute extends HttpService {
   def l33tRoute = path("l33t") {
     post {
       entity(as[L33tRequest]) { request =>
-      // We will fix this import and the timeout definition in a next exercise
-        import ExecutionContext.Implicits.global
         import scala.concurrent.duration._
         implicit val timeout = Timeout(20 seconds)
         import akka.pattern.ask

@@ -7,6 +7,7 @@ import spray.http.StatusCodes
 import spray.httpx.SprayJsonSupport._
 
 import akka.actor.{Actor, Props, ActorRef, ActorRefFactory}
+import scala.concurrent.ExecutionContext
 
 class ReceptionistSpec extends Specification with Specs2RouteTest {
 
@@ -22,6 +23,7 @@ class ReceptionistSpec extends Specification with Specs2RouteTest {
 
   val subject = new ReverseRoute with L33tRoute with TestCreationSupport {
     implicit def actorRefFactory: ActorRefFactory = system
+    implicit def executionContext = system.dispatcher
   }
 
   "The Receptionist" should {
