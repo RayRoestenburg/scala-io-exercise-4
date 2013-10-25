@@ -13,3 +13,15 @@ case class ReverseResponse(value:String, isPalindrome:Boolean = false)
 object ReverseResponse extends DefaultJsonProtocol {
   implicit val format = jsonFormat2(ReverseResponse.apply)
 }
+
+case class L33tRequest(value:String)
+
+object L33tRequest extends DefaultJsonProtocol {
+  implicit val format = jsonFormat1(L33tRequest.apply)
+}
+
+case class L33tResponse(value:String)
+
+object L33tResponse extends DefaultJsonProtocol {
+  implicit val format = jsonFormat1(L33tResponse.apply)
+}

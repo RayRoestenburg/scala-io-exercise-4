@@ -11,11 +11,12 @@ import scala.util.{Failure, Success}
 
 trait Receptionist extends HttpServiceActor
                       with ReverseRoute
+                      with L33tRoute
                       with CreationSupport {
 
   import ReverseActor._
 
-  def receive = runRoute(reverseRoute)
+  def receive = runRoute(reverseRoute ~ l33tRoute)
 
 }
 
@@ -23,8 +24,7 @@ trait ReverseRoute extends HttpService {
 
   def createChild(props:Props, name:String):ActorRef
 
-  import ReverseActor._
-  private val reverseActor = createChild(props, name)
+  private val reverseActor = createChild(ReverseActor.props, ReverseActor.name)
 
   def reverseRoute:Route = path("reverse") {
     post {
@@ -45,6 +45,30 @@ trait ReverseRoute extends HttpService {
           case Success(NotInitialized) => complete(StatusCodes.ServiceUnavailable)
           case Failure(e) => complete(StatusCodes.InternalServerError)
         }
+      }
+    }
+  }
+}
+
+trait L33tRoute extends HttpService {
+
+  def createChild(props:Props, name:String):ActorRef
+
+  private val l33tActor = createChild(L33tActor.props, L33tActor.name)
+
+  def l33tRoute = path("l33t") {
+    post {
+      entity(as[L33tRequest]) { request =>
+      // We will fix this import and the timeout definition in a next exercise
+        import ExecutionContext.Implicits.global
+        import scala.concurrent.duration._
+        implicit val timeout = Timeout(20 seconds)
+        import akka.pattern.ask
+
+        import L33tActor._
+
+        val futureResponse = l33tActor.ask(L33tify(request.value)).mapTo[L33tResult].map(r=> L33tResponse(r.value))
+        complete(futureResponse)
       }
     }
   }
