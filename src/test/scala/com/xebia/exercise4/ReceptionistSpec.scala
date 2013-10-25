@@ -20,7 +20,7 @@ class ReceptionistSpec extends Specification with Specs2RouteTest {
     def getChild(name: String): Option[ActorRef] = None
   }
 
-  val subject = new ReverseRoute with TestCreationSupport {
+  val subject = new ReverseRoute with L33tRoute with TestCreationSupport {
     implicit def actorRefFactory: ActorRefFactory = system
   }
 
@@ -40,7 +40,13 @@ class ReceptionistSpec extends Specification with Specs2RouteTest {
         response.value must beEqualTo("akka")
         response.isPalindrome must beTrue
       }
-
+    }
+    "Respond with a JSON response that contains a reversed string value" in {
+      Post("/l33t", L33tRequest("somestuff")) ~> subject.l33tRoute ~> check {
+        status === StatusCodes.OK
+        val response = entityAs[L33tResponse]
+        response.value must beEqualTo("50M357UFF")
+      }
     }
   }
 }

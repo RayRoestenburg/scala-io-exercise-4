@@ -14,11 +14,11 @@ class Settings(config: Config, extendedSystem: ExtendedActorSystem) extends Exte
     val Host = config.getString("scala-io-exercise.http.host")
   }
 
-  //TODO create a Format object that contains the uppercase, useShift and the conversion maps
-  object Format {
+  //TODO create a L33t object that contains the uppercase, useShift and the conversion maps
+  object L33t {
     // TODO read the uppercase and useshift from your configuration
-    val uppercase = config.getBoolean("scala-io-exercise.format.uppercase")
-    val useShift = config.getBoolean("scala-io-exercise.format.use-shift")
+    val uppercase = config.getBoolean("scala-io-exercise.l33t.uppercase")
+    val useShift = config.getBoolean("scala-io-exercise.l33t.use-shift")
   }
 
   val askTimeout = FiniteDuration(config.getMilliseconds("scala-io-exercise.ask-timeout"), TimeUnit.MILLISECONDS)

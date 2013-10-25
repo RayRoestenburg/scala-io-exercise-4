@@ -7,7 +7,7 @@ import org.specs2.mutable.Specification
 import akka.actor.ActorSystem
 import com.typesafe.config.ConfigFactory
 
-class FormatActorSpec extends Specification  with Specs2RouteTest {
+class L33tActorSpec extends Specification  with Specs2RouteTest {
 
   // This is configured for the test
   // with fallback to the application.conf
@@ -15,7 +15,7 @@ class FormatActorSpec extends Specification  with Specs2RouteTest {
   """
   scala-io-exercise {
 
-    format {
+    l33t {
       uppercase = true
       use-shift = false
     }
@@ -24,11 +24,11 @@ class FormatActorSpec extends Specification  with Specs2RouteTest {
 
   "The FormatActor" should {
     "Replace specific characters with similar looking digits" in new AkkaTestkitContext(system) {
-      import FormatActor._
+      import L33tActor._
 
       val formatActor = system.actorOf(props, name)
-      formatActor ! Format("reverse")
-      expectMsg(FormatResult("R3V3R53"))
+      formatActor ! L33tify("reverse")
+      expectMsg(L33tResult("R3V3R53"))
     }
   }
 
@@ -37,7 +37,7 @@ class FormatActorSpec extends Specification  with Specs2RouteTest {
    """
   scala-io-exercise {
 
-    format {
+    l33t {
       uppercase = false
       use-shift = true
     }
@@ -46,13 +46,13 @@ class FormatActorSpec extends Specification  with Specs2RouteTest {
 
   val alternateConfig = ConfigFactory.parseString(alternateConfigString).withFallback(ConfigFactory.load())
 
-  "The FormatActor" should {
-    "Replace specific characters with similar looking digits" in new AkkaTestkitContext(ActorSystem("test",alternateConfig)) {
-      import FormatActor._
+  "The L33tActor" should {
+    "Replace specific characters with similar looking digits using an alternate configuration" in new AkkaTestkitContext(ActorSystem("test",alternateConfig)) {
+      import L33tActor._
 
       val formatActor = system.actorOf(props, name)
-      formatActor ! Format("reverse")
-      expectMsg(FormatResult("r#v#r%#"))
+      formatActor ! L33tify("reverse")
+      expectMsg(L33tResult("r#v#r%#"))
     }
   }
 

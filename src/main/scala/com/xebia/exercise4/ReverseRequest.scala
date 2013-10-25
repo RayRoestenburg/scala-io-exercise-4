@@ -14,14 +14,14 @@ object ReverseResponse extends DefaultJsonProtocol {
   implicit val format = jsonFormat2(ReverseResponse.apply)
 }
 
-case class FormatRequest(value:String)
+case class L33tRequest(value:String)
 
-object FormatRequest extends DefaultJsonProtocol {
-  implicit val format = jsonFormat1(FormatRequest.apply)
+object L33tRequest extends DefaultJsonProtocol {
+  implicit val format = jsonFormat1(L33tRequest.apply)
 }
 
-case class FormatResponse(value:String)
+case class L33tResponse(value:String)
 
-object FormatResponse extends DefaultJsonProtocol {
-  implicit val format = jsonFormat1(FormatResponse.apply)
+object L33tResponse extends DefaultJsonProtocol {
+  implicit val format = jsonFormat1(L33tResponse.apply)
 }
