@@ -1,18 +1,20 @@
 package com.xebia.exercise4
 
-import spray.routing._
-
-import spray.httpx.SprayJsonSupport._
 import scala.concurrent.ExecutionContext
+import scala.concurrent.duration._
+import scala.util.{Failure, Success}
+
 import akka.actor.{Props, ActorRef}
 import akka.util.Timeout
+
+import spray.routing._
+import spray.httpx.SprayJsonSupport._
 import spray.http.StatusCodes
-import scala.util.{Failure, Success}
 
 trait Receptionist extends HttpServiceActor
                       with ReverseRoute
                       with L33tRoute
-                      with CreationSupport {
+                      with ActorContextCreationSupport {
 
   import ReverseActor._
 
@@ -21,22 +23,18 @@ trait Receptionist extends HttpServiceActor
   implicit def executionContext = actorRefFactory.dispatcher
 }
 
-trait ReverseRoute extends HttpService {
-
+trait ReverseRoute extends HttpService with CreationSupport {
+  import ReverseActor._
   implicit def executionContext:ExecutionContext
-
-  def createChild(props:Props, name:String):ActorRef
 
   private val reverseActor = createChild(ReverseActor.props, ReverseActor.name)
 
   def reverseRoute:Route = path("reverse") {
     post {
       entity(as[ReverseRequest]) { request =>
-        import scala.concurrent.duration._
         implicit val timeout = Timeout(20 seconds)
-        import akka.pattern.ask
 
-        import ReverseActor._
+        import akka.pattern.ask
 
         val futureResponse = reverseActor.ask(Reverse(request.value)).mapTo[Result]
 
