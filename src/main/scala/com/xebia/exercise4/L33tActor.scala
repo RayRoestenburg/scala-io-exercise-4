@@ -1,4 +1,5 @@
-package com.xebia.exercise4
+package com.xebia
+package exercise4
 
 import akka.actor.{Props, Actor}
 
@@ -19,7 +20,7 @@ class L33tActor extends Actor {
   val uppercase = false
 
   //TODO get 'useShiftDigit' boolean from the Settings L33t object
-  val useShift = false
+  val useShiftDigit = false
 
   val conversionMap =      Map('o'-> 0, 'i'-> 1, 'z'->2, 'e'-> 3, 'a' -> '4', 's' -> 5, 'b'-> 6, 't' -> 7, 'B'-> 8, 'g'-> 9)
   val shiftConversionMap = Map('o'-> ')', 'i'->'!', 'z'->'@', 'e'-> '#', 'a'-> '$', 's' -> '%', 'b'-> '^', 't' -> '&', 'B'-> '*', 'g'-> '(')
@@ -29,7 +30,7 @@ class L33tActor extends Actor {
 
   def receive = {
     case L33tify(value) =>
-      val result = if(useShift) convertToShiftDigit(value) else convertToDigit(value)
+      val result = if(useShiftDigit) convertToShiftDigit(value) else convertToDigit(value)
       val msg = if(uppercase) result.toUpperCase() else result
 
       sender ! L33tResult(msg)

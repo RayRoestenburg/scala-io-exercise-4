@@ -1,9 +1,13 @@
-package com.xebia.exercise4
+package com.xebia
+package exercise4
+
+import java.util.concurrent.TimeUnit
 
 import com.typesafe.config.Config
+
 import akka.actor._
+
 import scala.concurrent.duration.FiniteDuration
-import java.util.concurrent.TimeUnit
 
 class Settings(config: Config, extendedSystem: ExtendedActorSystem) extends Extension {
 
