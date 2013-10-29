@@ -1,9 +1,13 @@
-package com.xebia.exercise4
+package com.xebia
+package exercise4
+
+import java.util.concurrent.TimeUnit
+
+import scala.concurrent.duration.FiniteDuration
 
 import com.typesafe.config.Config
+
 import akka.actor._
-import scala.concurrent.duration.FiniteDuration
-import java.util.concurrent.TimeUnit
 
 class Settings(config: Config, extendedSystem: ExtendedActorSystem) extends Extension {
 
@@ -18,7 +22,6 @@ class Settings(config: Config, extendedSystem: ExtendedActorSystem) extends Exte
   }
 
   val askTimeout = FiniteDuration(config.getMilliseconds("scala-io-exercise.ask-timeout"), TimeUnit.MILLISECONDS)
-
 }
 
 

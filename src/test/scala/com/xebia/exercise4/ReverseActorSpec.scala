@@ -1,10 +1,14 @@
-package com.xebia.exercise4
+package com.xebia
+package exercise4
 
-import org.specs2.mutable.Specification
-import TestSupport._
 import spray.testkit.Specs2RouteTest
 
-class ReverseActorSpec extends Specification with Specs2RouteTest {
+import org.specs2.mutable.Specification
+
+import TestSupport._
+
+class ReverseActorSpec extends Specification
+                          with Specs2RouteTest {
 
   "The ReverseActor" should {
     "Reverse a string that it receives if it is not a Palindrome" in new AkkaTestkitContext() {
@@ -17,7 +21,7 @@ class ReverseActorSpec extends Specification with Specs2RouteTest {
 
       expectMsg(NotInitialized)
 
-      // We will fix this later
+      // We will fix this in the next exercise
       Thread.sleep(600)
 
       reverseActor ! Reverse("reverse this!")
@@ -25,7 +29,6 @@ class ReverseActorSpec extends Specification with Specs2RouteTest {
       expectMsg(ReverseResult("!siht esrever"))
 
       expectNoMsg()
-
     }
 
     "Not reverse a string but return a PalindromeResult if the reversal has no effect" in new AkkaTestkitContext() {
@@ -36,7 +39,7 @@ class ReverseActorSpec extends Specification with Specs2RouteTest {
       reverseActor ! Reverse("akka")
       expectMsg(NotInitialized)
 
-      // We will fix this later
+      // We will fix this in the next exercise
       Thread.sleep(600)
 
       reverseActor ! Reverse("akka")
@@ -44,7 +47,6 @@ class ReverseActorSpec extends Specification with Specs2RouteTest {
       expectMsg(PalindromeResult)
 
       expectNoMsg()
-
     }
   }
 }

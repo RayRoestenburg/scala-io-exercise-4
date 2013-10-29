@@ -1,15 +1,18 @@
-package com.xebia.exercise4
+package com.xebia
+package exercise4
 
-import spray.testkit.Specs2RouteTest
-import org.specs2.mutable.Specification
+import scala.concurrent.ExecutionContext
+
+import akka.actor.{Actor, Props, ActorRef, ActorRefFactory}
 
 import spray.http.StatusCodes
 import spray.httpx.SprayJsonSupport._
+import spray.testkit.Specs2RouteTest
 
-import akka.actor.{Actor, Props, ActorRef, ActorRefFactory}
-import scala.concurrent.ExecutionContext
+import org.specs2.mutable.Specification
 
-class ReceptionistSpec extends Specification with Specs2RouteTest {
+class ReceptionistSpec extends Specification
+                          with Specs2RouteTest {
 
   trait TestCreationSupport extends CreationSupport {
     def createChild(props: Props, name: String): ActorRef = {
@@ -43,6 +46,7 @@ class ReceptionistSpec extends Specification with Specs2RouteTest {
         response.isPalindrome must beTrue
       }
     }
+
     "Respond with a JSON response that contains a reversed string value" in {
       Post("/l33t", L33tRequest("somestuff")) ~> subject.l33tRoute ~> check {
         status === StatusCodes.OK

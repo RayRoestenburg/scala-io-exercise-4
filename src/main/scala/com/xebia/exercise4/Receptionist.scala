@@ -12,7 +12,7 @@ import scala.util.{Failure, Success}
 trait Receptionist extends HttpServiceActor
                       with ReverseRoute
                       with L33tRoute
-                      with CreationSupport {
+                      with ActorContextCreationSupport {
 
   import ReverseActor._
 
@@ -22,10 +22,9 @@ trait Receptionist extends HttpServiceActor
 
 }
 
-trait ReverseRoute extends HttpService {
+trait ReverseRoute extends HttpService
+                      with CreationSupport {
   implicit def executionContext: ExecutionContext
-
-  def createChild(props:Props, name:String):ActorRef
 
   private val reverseActor = createChild(ReverseActor.props, ReverseActor.name)
 

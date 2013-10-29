@@ -1,6 +1,8 @@
-package com.xebia.exercise4
+package com.xebia
+package exercise4
 
 import akka.actor.ActorSystem
+
 import akka.testkit.{ImplicitSender, TestKit}
 
 import org.specs2.specification.After
