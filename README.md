@@ -43,3 +43,7 @@ The L33tActor needs to be modified to use the configuration.
 - Review the Settings Extension on the particulars of building an Akka Extension
 - Review the test for L33tActor on how to modify the configuration in a test
 
+###Next Exercise
+
+In the next exercise you'll learn how Actors can publish events and subscribe to events using the *EventStream*.
+Go to [Exercise 5](https://github.com/RayRoestenburg/scala-io-exercise-5)
