@@ -19,7 +19,7 @@ class Settings(config: Config, extendedSystem: ExtendedActorSystem) extends Exte
   //TODO create a L33t object that contains the uppercase, useShift and the conversion maps
     // TODO read the uppercase and useshift from your configuration
 
-  val askTimeout = FiniteDuration(config.getMilliseconds("scala-io-exercise.ask-timeout"), TimeUnit.MILLISECONDS)
+  val askTimeout = config.getDuration("scala-io-exercise.ask-timeout", TimeUnit.MILLISECONDS)
 
 }
 
