@@ -1,7 +1,7 @@
 Exercise 4
 ==========
 
-In this exercise we continue with the end result of [exercise 3](http://github/RayRoestenburg/scala-io-exercise-3).
+In this exercise we continue with the end result of [exercise 3](http://github.com/RayRoestenburg/scala-io-exercise-3).
 So far we've hardcoded a couple of things like the host and port of the HTTP listener. In this exercise we want to use the Akka application.conf configuration file for configuring our application. We are going to expose this configuration using an Akka "extension".
 
 We're adding another actor for our string manipulation business for supporting a version of [Leetspeak](http://en.wikipedia.org/wiki/Leet).
